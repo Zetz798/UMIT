@@ -1,0 +1,19 @@
+* text=auto
+.gitattributes text eol=lf
+.gitignore text eol=lf
+*.md text eol=lf
+*.qml text eol=lf
+*.cpp text eol=lf
+*.hpp text eol=lf
+*.c text eol=lf
+*.h text eol=lf
+*.js text eol=lf
+*.json text eol=lf
+*.java text eol=lf
+*.xml text eol=lf
+*.cmake text eol=lf
+CMakeLists.txt text eol=lf
+*.png binary
+# Preserve the upstream sources and their documented checksums exactly.
+third_party/tweetnacl/tweetnacl.c -text
+third_party/tweetnacl/tweetnacl.h -text

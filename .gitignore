@@ -1,0 +1,28 @@
+# Generated builds and Qt Creator settings
+build/
+build-*/
+cmake-build-*/
+.qtcreator/
+*.user
+*.user.*
+CMakeUserPresets.json
+.cache/
+.DS_Store
+Thumbs.db
+
+# Local secrets and signing material
+.env
+.env.*
+!.env.example
+*.keystore
+*.jks
+*.p12
+*.pfx
+*.pem
+*.key
+local.properties
+
+# Distribute app binaries separately from source
+*.apk
+*.aab
+*.ipa
