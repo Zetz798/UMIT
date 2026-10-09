@@ -6,6 +6,7 @@ var copy = {
     profile: ["Аккаунт", "Аккаунт", "Account"],
     settings: ["Настройки", "Баптау", "Settings"],
     support: ["Помощь", "Көмек", "Help"],
+    pressBackAgain: ["Нажмите «Назад» ещё раз для выхода", "Шығу үшін «Артқа» түймесін тағы басыңыз", "Press Back again to leave the app"],
     welcome: ["Добро пожаловать в UMIT", "UMIT-ке қош келдіңіз", "Welcome to UMIT"],
     tagline: ["Один билет — один проход.", "Бір билет — бір кіру.", "One ticket. One entry."],
     about: ["Билеты и контроль входа в одном приложении. Мы создаём удобный способ посещать мероприятия и проверять билеты.", "Билеттер мен кіруді бақылау — бір қолданбада. Іс-шараларға қатысу мен билеттерді тексеруді ыңғайлы етеміз.", "Tickets and entry checks in one app. We are building a simple way to attend events and validate tickets."],

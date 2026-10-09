@@ -43,6 +43,36 @@ ApplicationWindow {
         target: account
         function onSessionChanged() { controller.resetSession() }
     }
+    Timer {
+        id: backTimer
+        interval: 2000
+    }
+    Shortcut {
+        sequence: "Back"
+        autoRepeat: false
+        enabled: Qt.platform.os === "android" && !backTimer.running
+        onActivated: {
+            if (Qt.inputMethod.visible) {
+                Qt.inputMethod.hide()
+                return
+            }
+            backTimer.start()
+        }
+    }
+    Label {
+        visible: backTimer.running
+        text: window.tr("pressBackAgain")
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 12
+        width: Math.min(implicitWidth, parent.width - 24)
+        wrapMode: Text.WordWrap
+        horizontalAlignment: Text.AlignHCenter
+        padding: 12
+        color: "white"
+        z: 100
+        background: Rectangle { color: "#333333"; radius: 12 }
+    }
     header: ToolBar {
         visible: !appSettings.locked
         background: Rectangle { color: window.color }
@@ -63,42 +93,6 @@ ApplicationWindow {
             Item { Layout.fillWidth: true }
             ToolButton { text: appSettings.lockEnabled ? "●" : "○"; visible: appSettings.lockEnabled; onClicked: appSettings.lockNow(); Accessible.name: window.tr("lockNow") }
             Item { implicitWidth: 6 }
-        }
-        Timer {
-            id: backTimer
-            interval: 2000
-        }
-
-        Shortcut {
-            sequence: "Back"
-            autoRepeat: false
-            enabled: Qt.platform.os === "android" && !backTimer.running
-
-            onActivated: {
-                if (Qt.inputMethod.visible) {
-                    Qt.inputMethod.hide()
-                    return
-                }
-                backTimer.start()
-            }
-        }
-
-        Label {
-            visible: backTimer.running
-            text: "Нажмите «Назад» ещё раз для выхода"
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: 12
-            width: Math.min(implicitWidth, parent.width - 24)
-            wrapMode: Text.WordWrap
-            horizontalAlignment: Text.AlignHCenter
-            padding: 12
-            color: "white"
-            z: 100
-            background: Rectangle {
-                color: "#333333"
-                radius: 12
-            }
         }
     }
     footer: TabBar {

@@ -29,6 +29,20 @@ The development setup used Qt 6.12.0, NDK 27.2.12479018, and JDK 21. See [Window
 
 ## Desktop preview and tests
 
+UMIT can also run as a native Windows application for recording a demo of the local ticket flow. Open the project with a Qt 6.12 Desktop MinGW kit and build `ticket_mobile`. The desktop app supports the same local accounts, tickets, and settings. **Phantom connection is currently mobile-only, and neither build sends Solana transactions.**
+
+To package a Windows build without requiring Qt Creator on the destination machine, use `windeployqt` from the matching Qt installation. Keep the executable and the deployed DLL, plugin, and QML directories together. For example, from a Qt/MinGW build environment:
+
+```powershell
+cmake -S . -B build/desktop-demo-release -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=C:/Qt/6.12.0/mingw_64 -DTICKET_BUILD_MOBILE=ON -DTICKET_BUILD_CLI=OFF -DBUILD_TESTING=OFF -DUMIT_UI_VERIFY=OFF
+cmake --build build/desktop-demo-release --target ticket_mobile --parallel 4
+New-Item -ItemType Directory -Force build/windows-package
+Copy-Item build/desktop-demo-release/mobile/ticket_mobile.exe build/windows-package/UMIT.exe
+windeployqt --release --compiler-runtime --qmldir mobile build/windows-package/UMIT.exe
+```
+
+Adjust the Qt installation path for your machine. Record issuance and first/repeated redemption as a **local demo**; there is no ticket transaction to show in Explorer yet.
+
 Open the same project with a matching Qt 6.12 Desktop kit. Enable `TICKET_BUILD_MOBILE`, `TICKET_BUILD_CLI`, and `BUILD_TESTING`; the Qt Test module is required. Build, then run:
 
 ```sh
